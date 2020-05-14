@@ -19,7 +19,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -29,6 +29,10 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Steam",    NULL,	  "Steam",    1 << 8,	    0,		 -1 },
+	{ "Steam",    NULL,	  "Friends List",    1 << 9,	    0,		 -1 },
+	{ "Steam",    NULL,	  "Friends List",    1 << 9,	    0,		 -1 },
+	{ "discord",  NULL,	  NULL,       1 << 9,	    0,		 -1 },
 };
 
 #include "grid.c"
@@ -88,13 +92,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	{ MODKEY,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY,                       XK_dead_grave,      view,           {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_dead_grave,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
@@ -108,6 +112,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+	TAGKEYS(                        XK_0,                      9)
 	{ MODKEY,		        XK_equal,  quit,           {0} },
 };
 
