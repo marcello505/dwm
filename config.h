@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
@@ -30,8 +30,8 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "Steam",    NULL,	  "Steam",    1 << 8,	    0,		 -1 },
-	{ "Steam",    NULL,	  "Friends List",    1 << 9,	    0,		 -1 },
-	{ "Steam",    NULL,	  "Friends List",    1 << 9,	    0,		 -1 },
+	{ "Steam",    NULL,	  "Friends List",    1 << 9,0,		 -1 },
+	{ "Steam",    NULL,	  "Chat",     1 << 9,	    0,		 -1 },
 	{ "discord",  NULL,	  NULL,       1 << 9,	    0,		 -1 },
 };
 
@@ -73,6 +73,7 @@ static const char *pwmanagercmd[] = { "pwmanagercmd", NULL };
 static const char *audiomanagercmd[] = { "pavucontrol", NULL };
 static const char *calculatorcmd[] = { "gnome-calculator", NULL };
 static const char *screenshotcmd[] = { "screenshot.sh", NULL };
+static const char *screenshotuploadcmd[] = { "screenshot.sh", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -84,6 +85,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_F4,	   spawn,	   {.v = audiomanagercmd } },
 	{ MODKEY,			XK_F12,	   spawn,	   {.v = calculatorcmd } },
 	{ 0,				XK_Print,  spawn,	   {.v = screenshotcmd } },
+	{ MODKEY,			XK_Print,  spawn,	   {.v = screenshotuploadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Down,   focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Up,     focusstack,     {.i = -1 } },
@@ -98,10 +100,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[4]} },
-	{ MODKEY|ShiftMask,                       XK_r,      setlayout,      {.v = &layouts[5]} },
+	{ MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[5]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY,	                XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_dead_grave,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_dead_grave,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -118,7 +120,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	TAGKEYS(                        XK_0,                      9)
-	{ MODKEY,		        XK_equal,  quit,           {0} },
+	{ MODKEY|ShiftMask,	        XK_equal,  quit,           {0} },
 };
 
 /* button definitions */
